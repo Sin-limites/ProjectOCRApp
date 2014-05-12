@@ -17,13 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mobtest.R;
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
 public class MainActivity extends ActionBarActivity {
-
+ 
 	TessBaseAPI baseApi = new TessBaseAPI();
 	GPSLocTrack gps = new GPSLocTrack(this);
 	ImageView imageView1;
@@ -31,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
 	File file = new File(Environment.getExternalStorageDirectory()
 			+ File.separator + "img.jpg");
 	Bitmap thePic;
+	TextView tv;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +52,9 @@ public class MainActivity extends ActionBarActivity {
 
 		Pix img = ReadFile.readBitmap(thePic);
 		baseApi.setImage(img);
-		TextView tv = (TextView) findViewById(R.id.textView1);
+		tv = (TextView) findViewById(R.id.IDTView);
 		tv.setText(baseApi.getUTF8Text());
+
 	}
 
 	private void processGPS() {
@@ -62,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
 
 		// Only run if GPS is enabled on device
 		if (gps.canGetLocation()) {
-
+			gps.getLocation();
 			// Set latitude and longtitude location to textview
 			TextView locView = (TextView) findViewById(R.id.TextViewLoc);
 			locView.setText("Locatie: " + String.valueOf(gps.getLatitude())
@@ -75,11 +76,18 @@ public class MainActivity extends ActionBarActivity {
 
 	}
 
-	public void onClickMap(View v){
+	public void onClickMap(View v) {
 		Intent intent = new Intent(this, GoogleMapAPI.class);
 		startActivity(intent);
 	}
 	
+	public void onClickList(View v) {
+		Intent intent = new Intent(this, ContainerDetailActivity.class);
+		intent.putExtra("equipmentnumber", tv.getText());
+		//System.out.println(tv.getText());
+		startActivity(intent);
+	}
+
 	private void initializeControls() {
 		imageView1 = (ImageView) findViewById(R.id.imageView1);
 		btnCapture = (Button) findViewById(R.id.Capture);

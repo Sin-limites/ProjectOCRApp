@@ -7,11 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-<<<<<<< HEAD
     tools:context="com.sinlimites.ocrapp.MainActivity$PlaceholderFragment" >
-=======
-    tools:context="com.example.mobtest.MainActivity$PlaceholderFragment" >
->>>>>>> 2f3b4cb8718c4505b5d3ac4337e3f48968a524d9
 
     <ImageView
         android:id="@+id/imageView1"
@@ -22,65 +18,76 @@
         android:background="@drawable/bg"
         android:src="@drawable/abc_ic_search" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/Capture"
-        android:onClick="onClick"
-        android:drawableLeft="@drawable/wand_small"
-        android:text="Scan foto" />
-
-    <Button
-        android:id="@+id/Capture"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="15dp"
-        android:onClick="onCapClick"
-        android:drawableLeft="@drawable/cameraicon"
-        android:text="Neem foto" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="100dp"
-        android:layout_toRightOf="@+id/imageView1"
-        android:text="Tekst in de foto:" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@+id/textView2"
-        android:text="----" />
-
     <TextView
         android:id="@+id/TextViewLoc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="---" />
+        android:text="Locatie:" />
 
-<<<<<<< HEAD
+    <TextView
+        android:id="@+id/IDTView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="----" />
+
     <Button
         android:id="@+id/MapButton"
-        android:layout_width="200dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button"
         android:drawableLeft="@drawable/wand_small"
         android:onClick="onClickMap"
-        android:text="Ga naar de map" />
+        android:text="Map"
+        android:textColor="#FFFFFF" />
+    
+    <Button
+        android:id="@+id/ListButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/wand_small"
+        android:onClick="onClickList"
+        android:text="List"
+        android:textColor="#FFFFFF" />
 
-=======
->>>>>>> 2f3b4cb8718c4505b5d3ac4337e3f48968a524d9
+    <TextView
+        android:id="@+id/LocText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:text="Container ID:" />
+
+    <Button
+        android:id="@+id/Capture"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/MapButton"
+        android:layout_alignBottom="@+id/MapButton"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/cameraicon"
+        android:onClick="onCapClick"
+        android:text="Neem foto"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Capture"
+        android:layout_alignBottom="@+id/Capture"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/wand_small"
+        android:onClick="onClick"
+        android:text="Scan foto"
+        android:textColor="#FFFFFF" />
+
 </RelativeLayout>

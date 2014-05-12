@@ -55,27 +55,11 @@ public class GPSLocTrack extends Service implements LocationListener {
 					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 			if (!isGPSEnabled && !isNetworkEnabled) {
-			
+
 			} else {
-				this.canGetLocation = true;
-				// First get location from Network Provider
-				if (isNetworkEnabled) {
-					locationManager.requestLocationUpdates(
-							LocationManager.NETWORK_PROVIDER,
-							MIN_TIME_BW_UPDATES,
-							MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-					Log.d("Network", "Network");
-					if (locationManager != null) {
-						location = locationManager
-								.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-						if (location != null) {
-							latitude = location.getLatitude();
-							longitude = location.getLongitude();
-						}
-					}
-				}
-				// if GPS Enabled get lat/long using GPS Services
+				// using GPS Services
 				if (isGPSEnabled) {
+					this.canGetLocation = true;
 					if (location == null) {
 						locationManager.requestLocationUpdates(
 								LocationManager.GPS_PROVIDER,
@@ -85,6 +69,24 @@ public class GPSLocTrack extends Service implements LocationListener {
 						if (locationManager != null) {
 							location = locationManager
 									.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+							if (location != null) {
+								latitude = location.getLatitude();
+								longitude = location.getLongitude();
+							}
+						}
+					}
+
+					// Get location from Network Provider
+					if (isNetworkEnabled) {
+						this.canGetLocation = true;
+						locationManager.requestLocationUpdates(
+								LocationManager.NETWORK_PROVIDER,
+								MIN_TIME_BW_UPDATES,
+								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+						Log.d("Network", "Network");
+						if (locationManager != null) {
+							location = locationManager
+									.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 							if (location != null) {
 								latitude = location.getLatitude();
 								longitude = location.getLongitude();
@@ -118,43 +120,47 @@ public class GPSLocTrack extends Service implements LocationListener {
 		// return longitude
 		return longitude;
 	}
-	
-	public boolean canGetLocation() {
-        return this.canGetLocation;
-    }
-     
-    /**
-     * Function to show settings alert dialog
-     * */
-    public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-        alertDialog.setTitle("GPS instellingen");
-  
-        // Setting Dialog Message
-        alertDialog.setMessage("GPS staat niet aan! Wilt u naar het instellingen menu navigeren?");
-  
-        // Setting Icon to Dialog
-        //alertDialog.setIcon(R.drawable.delete);
-  
-        // On pressing Settings button
-        alertDialog.setPositiveButton("Instellingen", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
-        });
-  
-        // on pressing cancel button
-        alertDialog.setNegativeButton("Nee", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-            }
-        });
-  
-        // Showing Alert Message
-        alertDialog.show();
-    }
+	public boolean canGetLocation() {
+		return this.canGetLocation;
+	}
+
+	/**
+	 * Function to show settings alert dialog
+	 * */
+	public void showSettingsAlert() {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+
+		alertDialog.setTitle("GPS instellingen");
+
+		// Setting Dialog Message
+		alertDialog
+				.setMessage("GPS staat niet aan! Wilt u naar het instellingen menu navigeren?");
+
+		// Setting Icon to Dialog
+		// alertDialog.setIcon(R.drawable.delete);
+
+		// On pressing Settings button
+		alertDialog.setPositiveButton("Instellingen",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(
+								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+						mContext.startActivity(intent);
+					}
+				});
+
+		// on pressing cancel button
+		alertDialog.setNegativeButton("Nee",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
+
+		// Showing Alert Message
+		alertDialog.show();
+	}
 
 	@Override
 	public void onLocationChanged(Location location) {
