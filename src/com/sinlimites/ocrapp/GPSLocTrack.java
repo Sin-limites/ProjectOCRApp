@@ -66,14 +66,14 @@ public class GPSLocTrack extends Service implements LocationListener {
 								MIN_TIME_BW_UPDATES,
 								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 						Log.d("GPS Enabled", "GPS Enabled");
-						if (locationManager != null) {
-							location = locationManager
-									.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-							if (location != null) {
-								latitude = location.getLatitude();
-								longitude = location.getLongitude();
-							}
-						}
+						// if (locationManager != null) {
+						location = locationManager
+								.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+						// if (location != null) {
+						latitude = location.getLatitude();
+						longitude = location.getLongitude();
+						// }
+						// }
 					}
 
 					// Get location from Network Provider
@@ -84,14 +84,14 @@ public class GPSLocTrack extends Service implements LocationListener {
 								MIN_TIME_BW_UPDATES,
 								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
 						Log.d("Network", "Network");
-						if (locationManager != null) {
+						//if (locationManager != null) {
 							location = locationManager
 									.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-							if (location != null) {
+							//if (location != null) {
 								latitude = location.getLatitude();
 								longitude = location.getLongitude();
-							}
-						}
+							//}
+						//}
 					}
 				}
 			}

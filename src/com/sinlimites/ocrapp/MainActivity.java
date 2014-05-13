@@ -2,6 +2,7 @@ package com.sinlimites.ocrapp;
 
 import java.io.File;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,19 +10,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.sinlimites.ocrapp.R;
 
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
  
 	TessBaseAPI baseApi = new TessBaseAPI();
 	GPSLocTrack gps = new GPSLocTrack(this);

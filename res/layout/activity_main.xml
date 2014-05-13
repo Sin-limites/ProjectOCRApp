@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg"
-        android:src="@drawable/abc_ic_search" />
+        android:src="@drawable/cameraicon" />
 
     <TextView
         android:id="@+id/TextViewLoc"

@@ -53,15 +53,13 @@ public class ContainerDetailActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 
-				int itemPosition = position;
+				//int itemPosition = position; -->Old toast code line
 
 				String itemValue = (String) listView
 						.getItemAtPosition(position);
 
-				Toast.makeText(
-						getApplicationContext(),
-						"Position :" + itemPosition + "  ListItem : "
-								+ itemValue, Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), itemValue,
+						Toast.LENGTH_LONG).show();
 			}
 
 		});
@@ -73,6 +71,7 @@ public class ContainerDetailActivity extends Activity {
 
 		@Override
 		protected String doInBackground(String... params) {
+			
 			StringBuilder builder = new StringBuilder();
 			HttpClient client = new DefaultHttpClient();
 			HttpGet httpGet = new HttpGet(JsonUrl);
@@ -102,8 +101,9 @@ public class ContainerDetailActivity extends Activity {
 		}
 
 		protected void onPreExecute() {
-			Toast.makeText(ContainerDetailActivity.this, "Please wait...",
-					Toast.LENGTH_LONG).show();
+			
+			Toast.makeText(ContainerDetailActivity.this, "Please wait... Connecting to server...",
+					Toast.LENGTH_SHORT).show();
 		}
 
 		protected void onPostExecute(String json) {
@@ -112,6 +112,7 @@ public class ContainerDetailActivity extends Activity {
 				System.out.println(jsonObject.getString("portofdischarge"));
 
 				String[] values = new String[] {
+						"Ownership: WARNING! BIC CODE IS NOT REGISTERED!",
 						"Port of discharge: "
 								+ jsonObject.getString("portofdischarge"),
 						"Terminal: " + jsonObject.getString("terminal"),
