@@ -3,7 +3,7 @@ ProjectOCRApp
 
 Android application with OCR capabilities
 
-*REQUIRES*
+*REQUIRES* (as library projects)
 
 AppCompatv7 - https://github.com/BrJansen/AppCompatv7
 
