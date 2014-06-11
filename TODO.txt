@@ -1,0 +1,9 @@
+TODO:
+
+== Strings in xml "id's" maken ==
+User interface verbeteren.
+Bijsnijden in geheugen opslaan (shared prefs, local storage).
+Foto opnieuw inladen als activity opnieuw opstart.
+Code opschonen.
+Handmatig code invoeren.
+Fout afhandeling (try, catch).

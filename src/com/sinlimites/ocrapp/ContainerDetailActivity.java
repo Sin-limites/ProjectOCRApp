@@ -1,151 +1,59 @@
 package com.sinlimites.ocrapp;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-public class ContainerDetailActivity extends Activity {
+public class ContainerDetailActivity extends AppActivity {
 
-	ListView listView;
-	String JsonUrl;
-	public JSONArray jsonArray;
-	Intent intent;
-	String equipmentnumber;
+	private final String JsonBaseUrl = "http://145.24.222.137:8080/RestService/rest/container/get/";
+	private Intent intent;
+	private ArrayList<TextView> tvList = new ArrayList<TextView>();
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_container_detail);
+		MyApplication.setActivity(this);
 
 		intent = getIntent();
-		equipmentnumber = intent.getStringExtra("equipmentnumber");
-		JsonUrl = "http://145.24.222.137:8080/RestService/rest/container/get/"
-				+ equipmentnumber;
+		String equipmentnumber = intent.getStringExtra("equipmentnumber");
+		String JsonUrl = JsonBaseUrl + equipmentnumber;
+		containerCode = (EditText) findViewById(R.id.container_detail_edit);
 
-		listView = (ListView) findViewById(R.id.list);
+		GetTextViews();
 
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-
-				//int itemPosition = position; -->Old toast code line
-
-				String itemValue = (String) listView
-						.getItemAtPosition(position);
-
-				Toast.makeText(getApplicationContext(), itemValue,
-						Toast.LENGTH_LONG).show();
-			}
-
-		});
-
-		new JSONAsync().execute();
+		new JSONAsync(JsonUrl, this, tvList).execute();
+		
+		if(APIChecker.CheckApiLevel() >= Build.VERSION_CODES.JELLY_BEAN){
+			containerCode.setBackground(getResources().getDrawable(R.drawable.edittext_border_low_version));
+		}
+		containerCode.setOnKeyListener(EditTextKeyListener((Button)findViewById(R.id.ListButton)));
 	}
 
-	public class JSONAsync extends AsyncTask<String, Void, String> {
+	/*
+	 * Gets the layout containing the 2 TextViews and adds it to the ArrayList
+	 */
+	private void GetTextViews() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LinearLayout viewParent = (LinearLayout) inflater.inflate(R.layout.container_field_layout, null);
 
-		@Override
-		protected String doInBackground(String... params) {
-			
-			StringBuilder builder = new StringBuilder();
-			HttpClient client = new DefaultHttpClient();
-			HttpGet httpGet = new HttpGet(JsonUrl);
-			try {
-				HttpResponse response = client.execute(httpGet);
-				StatusLine statusLine = response.getStatusLine();
-				int statusCode = statusLine.getStatusCode();
-				if (statusCode == 200) {
-					HttpEntity entity = response.getEntity();
-					InputStream content = entity.getContent();
-					BufferedReader reader = new BufferedReader(
-							new InputStreamReader(content));
-					String line;
-					while ((line = reader.readLine()) != null) {
-						builder.append(line);
-					}
-				} else {
-					Log.e(ContainerDetailActivity.class.toString(),
-							"Failed to download file");
-				}
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			return builder.toString();
+		LinearLayout layout = (LinearLayout) viewParent.findViewById(R.id.container_list_item_layout);
+		for (int i = 1; i < layout.getChildCount(); i = i + 2) {
+			View tv = layout.getChildAt(i);
+			if (tv instanceof TextView)
+				tvList.add((TextView) tv);
 		}
-
-		protected void onPreExecute() {
-			
-			Toast.makeText(ContainerDetailActivity.this, "Please wait... Connecting to server...",
-					Toast.LENGTH_SHORT).show();
-		}
-
-		protected void onPostExecute(String json) {
-			try {
-				JSONObject jsonObject = new JSONObject(json);
-				System.out.println(jsonObject.getString("portofdischarge"));
-
-				String[] values = new String[] {
-						"Ownership: WARNING! BIC CODE IS NOT REGISTERED!",
-						"Port of discharge: "
-								+ jsonObject.getString("portofdischarge"),
-						"Terminal: " + jsonObject.getString("terminal"),
-						"Ship ID: " + jsonObject.getString("shipid"),
-						"Equipmentnumber: "
-								+ jsonObject.getString("equipmentnumber"),
-						"Stowage Position: "
-								+ jsonObject.getString("stowageposition"),
-						"UNO: " + jsonObject.getString("uno"),
-						"INO: " + jsonObject.getString("ino"),
-						"Consignment number: "
-								+ jsonObject.getString("consignmentnumber"),
-						"Weight: " + jsonObject.getString("weight") + " kilo",
-						"Quantity: "
-								+ jsonObject.getString("quantityincontainer"),
-						"Flashpoint: " + jsonObject.getString("flashpoint"),
-						"Shipping name: ENVIRONMENTALLY HAZARDOUS SUBSTANCE, SOLID, N.O.S.",
-						"Kind of package: CONTAINER" };
-
-				populateList(values);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			// http://145.24.222.137:8080/RestService/rest/container/get/PBAU3761225
-		}
-
 	}
-
-	private void populateList(String[] values) {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, values);
-
-		listView.setAdapter(adapter);
-	}
-
 }

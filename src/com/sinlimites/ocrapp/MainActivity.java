@@ -1,43 +1,54 @@
 package com.sinlimites.ocrapp;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.sinlimites.ocrapp.R;
 
 import com.googlecode.leptonica.android.Pix;
 import com.googlecode.leptonica.android.ReadFile;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
-public class MainActivity extends Activity {
- 
-	TessBaseAPI baseApi = new TessBaseAPI();
-	GPSLocTrack gps = new GPSLocTrack(this);
-	ImageView imageView1;
-	Button btnCapture;
-	File file = new File(Environment.getExternalStorageDirectory()
-			+ File.separator + "img.jpg");
-	Bitmap thePic;
-	TextView tv;
+public class MainActivity extends AppActivity {
 
+	private TessBaseAPI baseApi = new TessBaseAPI();
+	private GPSLocTrack gps = new GPSLocTrack(this);
+	private ImageView cameraImage;
+	private Button btnCapture;
+	private File file = new File(Environment.getExternalStorageDirectory() + File.separator + "img.jpg");
+	private Bitmap thePic;
+
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		MyApplication.setActivity(this);
 		initializeControls();
+
+		containerCode = (EditText) findViewById(R.id.IDTView);
+		containerCode.setOnKeyListener(EditTextKeyListener((Button)findViewById(R.id.ListButton)));
+		
+		
+		if(APIChecker.CheckApiLevel() >= Build.VERSION_CODES.JELLY_BEAN){
+			containerCode.setBackground(getResources().getDrawable(R.drawable.edittext_border_low_version));
+		}
 	}
 
 	public void onClick(View v) {
@@ -46,15 +57,19 @@ public class MainActivity extends Activity {
 	}
 
 	private void processTesseract() {
-		String path = Environment.getExternalStorageDirectory().toString()
-				+ "/tesseract/"; // Path to Tesseract dir
+		String path = null;
+		if (Environment.getExternalStorageDirectory() != null)
+			path = Environment.getExternalStorageDirectory().toString() + "/tesseract/"; 
+		// Path to Tesseract dir
+		else
+			path = getFilesDir() + "/tesseract/";
 
 		baseApi.init(path, "eng");
 
 		Pix img = ReadFile.readBitmap(thePic);
 		baseApi.setImage(img);
-		tv = (TextView) findViewById(R.id.IDTView);
-		tv.setText(baseApi.getUTF8Text());
+
+		containerCode.setText(baseApi.getUTF8Text());
 
 	}
 
@@ -67,8 +82,7 @@ public class MainActivity extends Activity {
 			gps.getLocation();
 			// Set latitude and longtitude location to textview
 			TextView locView = (TextView) findViewById(R.id.TextViewLoc);
-			locView.setText("Locatie: " + String.valueOf(gps.getLatitude())
-					+ ", " + String.valueOf(gps.getLongitude()));
+			locView.setText(R.string.location_header + String.valueOf(gps.getLatitude()) + ", " + String.valueOf(gps.getLongitude()));
 		} else {
 			// If application can't get GPS location, allow user to change GPS
 			// settings
@@ -81,34 +95,41 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, GoogleMapAPI.class);
 		startActivity(intent);
 	}
-	
+
 	public void onClickList(View v) {
-		Intent intent = new Intent(this, ContainerDetailActivity.class);
-		intent.putExtra("equipmentnumber", tv.getText());
-		//System.out.println(tv.getText());
-		startActivity(intent);
+		if(checkEquipmentNumber()){
+			Intent intent = new Intent(this, ContainerDetailActivity.class);
+			intent.putExtra("equipmentnumber", containerCode.getText().toString());
+			startActivity(intent);
+		} else {
+			Toast.makeText(this, R.string.wrong_code, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	/*
+	 * Checks if the inserted code isn't empty or equal to the default string.
+	 */
+	private boolean checkEquipmentNumber() {
+		Pattern regex = Pattern.compile("(^[a-zA-Z]{4})([0-9]{7})");
+		Matcher matcher = regex.matcher(containerCode.getText().toString());
+		return (!containerCode.getText().toString().equals("") &&
+				!containerCode.getText().toString().equals(getResources().getString(R.string.container_id)) &&
+				matcher.matches());
 	}
 
+	/*
+	 * Create an Intent with the action android.media.action.IMAGE_CAPTURE which
+	 * starts the camera
+	 */
 	private void initializeControls() {
-		imageView1 = (ImageView) findViewById(R.id.imageView1);
+		cameraImage = (ImageView) findViewById(R.id.imageView1);
 		btnCapture = (Button) findViewById(R.id.Capture);
 		btnCapture.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
-				// Create an instance of intent Pass action
-				// android.media.action.IMAGE_CAPTURE as argument -> Lauches
-				// camera.
-
 				Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-
-				// put file uri as extra
-
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-
-				// Start activity for result Pass intent (arg, req code)
-
 				startActivityForResult(intent, 0);
 			}
 		});
@@ -122,16 +143,14 @@ public class MainActivity extends Activity {
 		if (requestCode == 0) {
 			// Create instance of File
 			// -> Access file from storage
-			File file = new File(Environment.getExternalStorageDirectory()
-					+ File.separator + "img.jpg");
+			File file = new File(Environment.getExternalStorageDirectory() + File.separator + "img.jpg");
 			// Start crop via new intent
 			try {
 				cropCapturedImage(Uri.fromFile(file));
 			} catch (ActivityNotFoundException aNFE) {
 				// Capture error if crop action is not supported by device
 				String errorMessage = "Sorry - your device doesn't support the crop action!";
-				Toast toast = Toast.makeText(this, errorMessage,
-						Toast.LENGTH_SHORT);
+				Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
 				toast.show();
 			}
 		}
@@ -142,10 +161,13 @@ public class MainActivity extends Activity {
 			// Get cropped bitmap
 			thePic = extras.getParcelable("data");
 			// Set cropped image to imageview
-			imageView1.setImageBitmap(thePic);
+			cameraImage.setImageBitmap(thePic);
 		}
 	}
 
+	/*
+	 * This method starts the Activity so the user can crop the picture.
+	 */
 	public void cropCapturedImage(Uri picUri) {
 		// Call cropping intent
 		Intent cropIntent = new Intent("com.android.camera.action.CROP");

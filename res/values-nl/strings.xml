@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Application Strings -->
+    <string name="app_name">Container Identity</string>
+    <string name="action_settings">Opties</string>
+    <string name="title_activity_container_detail">Container Details</string>
+	
+    <!-- Header Strings -->
+    <string name="location_header">Locatie: </string>
+    <string name="map_header">Map</string>
+    <string name="list_header">Lijst</string>
+    <string name="container_id_header">Container ID: </string>
+    
+    	<!-- Container List Item Headers -->
+    	<string name="equipmentnumber">Container nummer: </string>
+    	<string name="quantityincontainer">Aantal in container: </string>
+    	<string name="stowageposition">Stowage positie: </string>
+    	<string name="consignmentnumber">Consignment nummer: </string>
+    	<string name="portofdischarge">Ligplaats: </string>
+    	<string name="handlingid">Huidige handeling ID: </string>
+    	<string name="weight">Gewicht: </string>
+    	<string name="ino">INO nummer: </string>
+    	<string name="terminal">Terminal: </string>
+    	<string name="flashpoint">Flashpoint: </string>
+    	<string name="shipid">Schip ID: </string>
+    	<string name="packagingid">Verpakkings ID: </string>
+    	<string name="uno">UNO nummer: </string>
+    
+    	<string name="weight_unit">kilo</string>
+    	
+    	
+    <!-- Dynamic Strings -->
+    <string name="take_picture">Neem foto</string>
+    <string name="scan_picture">Scan foto</string>
+    <string name="container_id">Container code</string>
+    
+    <!-- Content Descriptions -->
+    <string name="picture_placeholder">Foto placeholder</string>
+    
+    	<!-- Container List Item Descriptions 
+    	<string name="ownership_content">BIC code unknown!</string>
+    	<string name="port_discharge_content">Port of discharge unknown!</string>
+    	<string name="terminal_content">Terminal unknown!</string>
+    	<string name="shipId_content">Ship ID unknown!</string>
+    	<string name="equipmentnr_content">Equipment number unknown!</string>
+    	<string name="stowage_content">Stowage position unknown!</string>
+    	<string name="uno_content">UNO code unknown!</string>
+    	<string name="ino_content">INO code unknown!</string>
+    	<string name="consignment_content">Consignment number unknown!</string>
+    	<string name="weight_content">Weight unknown!</string>
+    	<string name="quantity_content">Quantity unknown!</string>
+    	<string name="flashpoint_content">Flashpoint unknown!</string>
+    	<string name="shipping_name_content">Shipping name unknown!</string>
+    	<string name="package_content">Kind of package unknown!</string> -->
+    	
+    	
+    <!-- Toast strings -->	
+    <string name="failed_connect">Fout tijdens het verbinden met de server</string>
+    <string name="connecting_to_server">Wachten&#8230; Bezig met verbinden naar de server&#8230;</string>
+    <string name="failed_download_file">Fout tijdens het downloaden van het bestand</string>
+    <string name="invalid_equipment_number">Container nummer niet bekend</string>
+    <string name="wrong_code">Geen valide container code ingevoerd</string>
+    	
+</resources>

@@ -16,6 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:background="@drawable/bg"
+        android:contentDescription="@string/picture_placeholder"
         android:src="@drawable/cameraicon" />
 
     <TextView
@@ -24,15 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Locatie:" />
-
-    <TextView
-        android:id="@+id/IDTView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="----" />
+        android:text="@string/location_header"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/MapButton"
@@ -42,18 +36,7 @@
         android:background="@drawable/button"
         android:drawableLeft="@drawable/wand_small"
         android:onClick="onClickMap"
-        android:text="Map"
-        android:textColor="#FFFFFF" />
-    
-    <Button
-        android:id="@+id/ListButton"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/button"
-        android:drawableLeft="@drawable/wand_small"
-        android:onClick="onClickList"
-        android:text="List"
+        android:text="@string/map_header"
         android:textColor="#FFFFFF" />
 
     <TextView
@@ -62,20 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/imageView1"
         android:layout_centerHorizontal="true"
-        android:text="Container ID:" />
-
-    <Button
-        android:id="@+id/Capture"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/MapButton"
-        android:layout_alignBottom="@+id/MapButton"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/button"
-        android:drawableLeft="@drawable/cameraicon"
-        android:onClick="onCapClick"
-        android:text="Neem foto"
-        android:textColor="#FFFFFF" />
+        android:text="@string/container_id_header"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/button1"
@@ -87,7 +58,49 @@
         android:background="@drawable/button"
         android:drawableLeft="@drawable/wand_small"
         android:onClick="onClick"
-        android:text="Scan foto"
+        android:text="@string/scan_picture"
         android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/Capture"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/MapButton"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/cameraicon"
+        android:onClick="onCapClick"
+        android:text="@string/take_picture"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/ListButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignTop="@+id/TextViewLoc"
+        android:background="@drawable/button"
+        android:drawableLeft="@drawable/wand_small"
+        android:onClick="onClickList"
+        android:text="@string/list_header"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/IDTView"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/LocText"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edittext_border_low_version"
+        android:ems="10"
+        android:inputType="textNoSuggestions"
+        android:onClick="onClickCheckText"
+        android:paddingBottom="0dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        android:text="@string/container_id"
+        android:textColor="#000000"
+        android:textSize="12sp" />
 
 </RelativeLayout>

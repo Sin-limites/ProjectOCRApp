@@ -1,14 +1,88 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/act_bg"
-    android:orientation="vertical" >
+    android:background="@drawable/act_bg" >
 
+    <TextView
+        android:id="@+id/old_os_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_black"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scroll_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/old_os_header" >
+
+        <LinearLayout
+            android:id="@+id/scroll_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
+    <!--
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_bg" >
     </ListView>
+    -->
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" >
+
+        <TextView
+            android:id="@+id/LocText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/container_id_header"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/container_detail_edit"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/LocText"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edittext_border_low_version"
+            android:ems="10"
+            android:inputType="textNoSuggestions"
+            android:onClick="onClickCheckText"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:text="@string/container_id"
+            android:textColor="#000000"
+            android:textSize="14sp" >
+
+        </EditText>
+
+        <Button
+            android:id="@+id/ListButton"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/container_detail_edit"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button"
+            android:drawableLeft="@drawable/wand_small"
+            android:onClick="onClickList"
+            android:text="@string/list_header"
+            android:textColor="#FFFFFF" />
+    </RelativeLayout>
+
+</RelativeLayout>
