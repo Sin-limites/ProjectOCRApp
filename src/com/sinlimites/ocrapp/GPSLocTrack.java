@@ -131,17 +131,16 @@ public class GPSLocTrack extends Service implements LocationListener {
 	public void showSettingsAlert() {
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
-		alertDialog.setTitle("GPS instellingen");
+		alertDialog.setTitle(R.string.gps_settings);
 
 		// Setting Dialog Message
-		alertDialog
-				.setMessage("GPS staat niet aan! Wilt u naar het instellingen menu navigeren?");
+		alertDialog.setMessage(R.string.gps_disabled);
 
 		// Setting Icon to Dialog
 		// alertDialog.setIcon(R.drawable.delete);
 
 		// On pressing Settings button
-		alertDialog.setPositiveButton("Instellingen",
+		alertDialog.setPositiveButton(R.string.settings,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(
@@ -151,7 +150,7 @@ public class GPSLocTrack extends Service implements LocationListener {
 				});
 
 		// on pressing cancel button
-		alertDialog.setNegativeButton("Nee",
+		alertDialog.setNegativeButton(R.string.no,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.cancel();

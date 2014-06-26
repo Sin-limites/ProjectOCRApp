@@ -20,6 +20,9 @@ public class ContainerDetailActivity extends AppActivity {
 	private Intent intent;
 	private ArrayList<TextView> tvList = new ArrayList<TextView>();
 
+	/**
+	 * Start the Json so the Application get the data from the server.
+	 */
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class ContainerDetailActivity extends AppActivity {
 		containerCode.setOnKeyListener(EditTextKeyListener((Button)findViewById(R.id.ListButton)));
 	}
 
-	/*
+	/**
 	 * Gets the layout containing the 2 TextViews and adds it to the ArrayList
 	 */
 	private void GetTextViews() {

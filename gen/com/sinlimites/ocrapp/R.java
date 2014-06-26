@@ -375,7 +375,7 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f060013;
-        public static final int connecting_to_server=0x7f060035;
+        public static final int connecting_to_server=0x7f06003a;
         public static final int consignmentnumber=0x7f060025;
         public static final int container_id=0x7f060032;
         public static final int container_id_header=0x7f060021;
@@ -383,45 +383,20 @@ containing a value of this type.
  Container List Item Headers 
          */
         public static final int equipmentnumber=0x7f060022;
-        /**  Container List Item Descriptions 
-    	<string name="ownership_content">BIC code unknown!</string>
-    	<string name="port_discharge_content">Port of discharge unknown!</string>
-    	<string name="terminal_content">Terminal unknown!</string>
-    	<string name="shipId_content">Ship ID unknown!</string>
-    	<string name="equipmentnr_content">Equipment number unknown!</string>
-    	<string name="stowage_content">Stowage position unknown!</string>
-    	<string name="uno_content">UNO code unknown!</string>
-    	<string name="ino_content">INO code unknown!</string>
-    	<string name="consignment_content">Consignment number unknown!</string>
-    	<string name="weight_content">Weight unknown!</string>
-    	<string name="quantity_content">Quantity unknown!</string>
-    	<string name="flashpoint_content">Flashpoint unknown!</string>
-    	<string name="shipping_name_content">Shipping name unknown!</string>
-    	<string name="package_content">Kind of package unknown!</string> 
- Toast strings 
- Container List Item Descriptions 
-    	<string name="ownership_content">BIC code unknown!</string>
-    	<string name="port_discharge_content">Port of discharge unknown!</string>
-    	<string name="terminal_content">Terminal unknown!</string>
-    	<string name="shipId_content">Ship ID unknown!</string>
-    	<string name="equipmentnr_content">Equipment number unknown!</string>
-    	<string name="stowage_content">Stowage position unknown!</string>
-    	<string name="uno_content">UNO code unknown!</string>
-    	<string name="ino_content">INO code unknown!</string>
-    	<string name="consignment_content">Consignment number unknown!</string>
-    	<string name="weight_content">Weight unknown!</string>
-    	<string name="quantity_content">Quantity unknown!</string>
-    	<string name="flashpoint_content">Flashpoint unknown!</string>
-    	<string name="shipping_name_content">Shipping name unknown!</string>
-    	<string name="package_content">Kind of package unknown!</string> 
+        /**  Toast strings 
  Toast strings 
          */
-        public static final int failed_connect=0x7f060034;
-        public static final int failed_download_file=0x7f060036;
+        public static final int failed_connect=0x7f060039;
+        public static final int failed_download_file=0x7f06003b;
         public static final int flashpoint=0x7f06002b;
+        public static final int gps_disabled=0x7f060036;
+        /**  GPS Strings 
+ GPS Strings 
+         */
+        public static final int gps_settings=0x7f060035;
         public static final int handlingid=0x7f060027;
         public static final int ino=0x7f060029;
-        public static final int invalid_equipment_number=0x7f060037;
+        public static final int invalid_equipment_number=0x7f06003c;
         public static final int list_header=0x7f060020;
         /**  Location client code resources (prefix with location_client) 
          */
@@ -431,14 +406,18 @@ containing a value of this type.
          */
         public static final int location_header=0x7f06001e;
         public static final int map_header=0x7f06001f;
+        public static final int no=0x7f060038;
+        public static final int no_code_found=0x7f06003e;
+        public static final int no_picture=0x7f060033;
         public static final int packagingid=0x7f06002d;
         /**  Content Descriptions 
  Content Descriptions 
          */
-        public static final int picture_placeholder=0x7f060033;
+        public static final int picture_placeholder=0x7f060034;
         public static final int portofdischarge=0x7f060026;
         public static final int quantityincontainer=0x7f060023;
         public static final int scan_picture=0x7f060031;
+        public static final int settings=0x7f060037;
         public static final int shipid=0x7f06002c;
         public static final int stowageposition=0x7f060024;
         /**  Dynamic Strings 
@@ -450,7 +429,7 @@ containing a value of this type.
         public static final int uno=0x7f06002e;
         public static final int weight=0x7f060028;
         public static final int weight_unit=0x7f06002f;
-        public static final int wrong_code=0x7f060038;
+        public static final int wrong_code=0x7f06003d;
     }
     public static final class style {
         /** 

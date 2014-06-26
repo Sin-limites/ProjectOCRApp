@@ -16,7 +16,7 @@ public class AppActivity extends Activity {
 	
 	protected EditText containerCode;
 
-	/*
+	/**
 	 * OnClick for the button so the user can get the entered Container
 	 * information
 	 */
@@ -30,7 +30,7 @@ public class AppActivity extends Activity {
 		}
 	}
 
-	/*
+	/**
 	 * Checks if the inserted code isn't empty or equal to the default string.
 	 */
 	private boolean checkEquipmentNumber() {
@@ -39,6 +39,10 @@ public class AppActivity extends Activity {
 		return (!containerCode.getText().toString().equals("") && !containerCode.getText().toString().equals(getResources().getString(R.string.container_id)) && matcher.matches());
 	}
 	
+	/**
+	 * Check if the text is it's original value if so set it empty.
+	 * @param v
+	 */
 	public void onClickCheckText(View v){
 		if(v instanceof EditText){
 			EditText editText = (EditText)v;
@@ -47,13 +51,17 @@ public class AppActivity extends Activity {
 		}
 	}
 
+	/**
+	 * If the user clicks enter, the button method is called.
+	 * @param button
+	 * @return
+	 */
 	public OnKeyListener EditTextKeyListener(final Button button){
 		return new OnKeyListener() {
 
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
-				    System.out.println("Enter ingedrukt!");
 				    button.performClick();
 				}
 				return false;

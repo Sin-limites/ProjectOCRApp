@@ -1,8 +1,8 @@
 package com.sinlimites.ocrapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-
 import com.sinlimites.ocrapp.R;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
@@ -10,7 +10,11 @@ import com.google.android.gms.maps.model.*;
 public class GoogleMapAPI extends Activity {
 
 	GPSLocTrack gps = new GPSLocTrack(this);
-
+	
+	/**
+	 * Implements a fragment with the Google maps API
+	 */
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -34,25 +34,16 @@
     <string name="take_picture">Neem foto</string>
     <string name="scan_picture">Scan foto</string>
     <string name="container_id">Container code</string>
+    <string name="no_picture">Er is geen foto gemaakt</string>
     
     <!-- Content Descriptions -->
     <string name="picture_placeholder">Foto placeholder</string>
     
-    	<!-- Container List Item Descriptions 
-    	<string name="ownership_content">BIC code unknown!</string>
-    	<string name="port_discharge_content">Port of discharge unknown!</string>
-    	<string name="terminal_content">Terminal unknown!</string>
-    	<string name="shipId_content">Ship ID unknown!</string>
-    	<string name="equipmentnr_content">Equipment number unknown!</string>
-    	<string name="stowage_content">Stowage position unknown!</string>
-    	<string name="uno_content">UNO code unknown!</string>
-    	<string name="ino_content">INO code unknown!</string>
-    	<string name="consignment_content">Consignment number unknown!</string>
-    	<string name="weight_content">Weight unknown!</string>
-    	<string name="quantity_content">Quantity unknown!</string>
-    	<string name="flashpoint_content">Flashpoint unknown!</string>
-    	<string name="shipping_name_content">Shipping name unknown!</string>
-    	<string name="package_content">Kind of package unknown!</string> -->
+    <!-- GPS Strings -->
+	<string name="gps_settings">GPS instellingen</string>
+	<string name="gps_disabled">GPS is uitgeschakeld! Wilt u naar de opties navigeren?</string>
+	<string name="settings">Opties</string>
+	<string name="no">Nee</string> 
     	
     	
     <!-- Toast strings -->	
@@ -61,5 +52,6 @@
     <string name="failed_download_file">Fout tijdens het downloaden van het bestand</string>
     <string name="invalid_equipment_number">Container nummer niet bekend</string>
     <string name="wrong_code">Geen valide container code ingevoerd</string>
+    <string name="no_code_found">Geen container code gevonden</string>
     	
 </resources>
